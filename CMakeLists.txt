@@ -9,20 +9,24 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 REQUIRED COMPONENTS    Widgets
+                                        Core)
 
 set(PROJECT_SOURCES
         main.cpp
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+        stopwatch.h
+        stopwatch.cpp
 )
 
 qt_add_executable(Secundomer
     MANUAL_FINALIZATION
     ${PROJECT_SOURCES})
 
-target_link_libraries(Secundomer PRIVATE Qt6::Widgets)
+target_link_libraries(Secundomer PRIVATE    Qt6::Widgets
+                                            Qt6::Core)
 
 set_target_properties(Secundomer PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com

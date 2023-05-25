@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "stopwatch.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,5 +18,10 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    Stopwatch *stopwatch;
+    bool isStartBtn;    // true: "Старт", false: "Пауза"
+
+private slots:
+    void showTime();
 };
 #endif // MAINWINDOW_H
