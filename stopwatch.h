@@ -14,22 +14,20 @@ public:
 
     QString getTime();
     QString getLapsInfo();
+    void nextLap();
+    bool startStopToggle(); // переключает и возвр. состояние таймера
+    void resetCounters();
 
 private:
     QTimer *timer;
-    unsigned int timeCount;     // счетчик 0,1 сек
-    unsigned int prevTimeCount; // счетчик пройденного времени
-    unsigned int lapsCount;     // счетчик кругов
+    uint32_t timeCount;     // счетчик 0,1 сек
+    uint32_t prevTimeCount; // счетчик пройденного времени
+    uint32_t lapsCount;     // счетчик кругов
+
     void timeCalc();
 
 signals:
     void sig_time();
-    void sig_laps();
-
-public slots:
-    void rcvBtnStart();
-    void rcvBtnLap();
-    void rcvBtnReset();
 };
 
 #endif // STOPWATCH_H

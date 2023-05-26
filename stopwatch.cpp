@@ -4,21 +4,22 @@ Stopwatch::Stopwatch(QObject *parent) : QObject{parent}, timeCount(0), prevTimeC
 {
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &Stopwatch::timeCalc);
-    timer->stop();
-    timer->setInterval(100);
 }
 
 Stopwatch::~Stopwatch(){}
 
 QString Stopwatch::getTime()
 {
-    unsigned int    min(timeCount / 600),
-                    sec(timeCount / 10 - min * 60),
-                    split(timeCount % 10);
+    uint32_t    min(timeCount / 600),
+                sec(timeCount / 10 - min * 60),
+                split(timeCount % 10);
 
     QString timeStr = (min < 10) ? "0" : "";
     timeStr += QString::number(min) + ":";
-    if (sec < 10) timeStr += "0";
+    if (sec < 10)
+    {
+        timeStr += "0";
+    }
     timeStr += QString("%1.%2").arg(sec).arg(split);
 
     return timeStr;
@@ -36,29 +37,31 @@ QString Stopwatch::getLapsInfo()
     return mes;
 }
 
+void Stopwatch::nextLap()
+{
+    ++lapsCount;
+}
+
 void Stopwatch::timeCalc()
 {
     ++timeCount;
     emit sig_time();    // сигнал о изменении времени
 }
 
-void Stopwatch::rcvBtnStart()
+bool Stopwatch::startStopToggle()
 {
-    if (timer->isActive()) timer->stop();
-    else timer->start();
+    if (timer->isActive())
+    {
+        timer->stop();
+    }
+    else timer->start(100);
+
+    return timer->isActive();
 }
 
-void Stopwatch::rcvBtnLap()
+void Stopwatch::resetCounters()
 {
-    ++lapsCount;
-    emit sig_laps();    // сигнал о внесении инфо по кругу
-}
-
-void Stopwatch::rcvBtnReset()
-{
-    timer->stop();
     timeCount = 0;
     prevTimeCount = 0;
     lapsCount = 0;
-    emit sig_time();    // сигнал о изменении времени
 }

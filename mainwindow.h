@@ -19,7 +19,6 @@ public:
 private:
     Ui::MainWindow *ui;
     Stopwatch *stopwatch;
-    bool isStartBtn;    // true: "Старт", false: "Пауза"
 
 private slots:
     void showTime();
