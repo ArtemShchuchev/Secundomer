@@ -25,6 +25,11 @@ QString Stopwatch::getTime()
     return timeStr;
 }
 
+bool Stopwatch::timeNotNull()
+{
+    return !timeCount;
+}
+
 QString Stopwatch::getLapsInfo()
 {
     QString mes(QString("Круг %1, время: %2.%3 сек")

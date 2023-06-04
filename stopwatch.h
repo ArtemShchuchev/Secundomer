@@ -13,6 +13,7 @@ public:
     ~Stopwatch();
 
     QString getTime();
+    bool timeNotNull();
     QString getLapsInfo();
     void nextLap();
     bool startStopToggle(); // переключает и возвр. состояние таймера

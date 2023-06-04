@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->pb_lap->setText("Круг");
     ui->pb_lap->setDisabled(true);
     ui->pb_reset->setText("Сброс");
+    //ui->pb_reset->setDisabled(true);
 
     ui->txtb_timeLaps->setReadOnly(true);
 
@@ -53,5 +54,6 @@ MainWindow::~MainWindow()
 void MainWindow::showTime()
 {
     ui->lb_time->setText(stopwatch->getTime());
+    ui->pb_reset->setDisabled(stopwatch->timeNotNull());
 }
 
